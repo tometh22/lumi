@@ -95,6 +95,10 @@ table{width:100%;border-collapse:collapse;font-size:22px}td{padding:9px 0}td+td{
 #lh{position:absolute;left:8%;right:8%;top:3.5vh;text-align:center;font-size:2.6vh;color:#8B93A7}
 #lc{position:absolute;left:7%;right:7%;top:75vh;text-align:center;font-size:4.4vh;line-height:1.25;font-weight:600;max-height:16.5vh;overflow:hidden}
 #lt{position:absolute;left:0;right:0;bottom:5.5vh;text-align:center;font-size:2vh;color:#4A5066;letter-spacing:1px;text-transform:uppercase}
+#gr{position:fixed;right:10px;bottom:2px;font-size:24px;line-height:1;padding:10px;color:#5A6180;z-index:8}
+#cg{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.72);z-index:25;display:none}#cg.on{display:block}
+#cb{position:absolute;left:50%;top:6%;width:88%;max-width:640px;-webkit-transform:translateX(-50%);transform:translateX(-50%);background:#12141D;border-radius:28px;padding:26px;max-height:88%;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#cb .k{margin:18px 0 6px}#cb .row{margin-top:8px}
 #cf{position:fixed;left:0;top:0;right:0;bottom:0;pointer-events:none;z-index:30;overflow:hidden}#cf i{position:absolute;top:-60px;font-style:normal;font-size:40px;animation:cae 3s linear forwards}
 @keyframes cae{to{transform:translateY(115vh) rotate(540deg)}}
 #ov{position:fixed;left:0;top:0;right:0;bottom:0;background:#05060A;z-index:20;display:none;text-align:center;flex-direction:column;justify-content:center;align-items:center}#ov.on{display:flex}
@@ -114,7 +118,13 @@ table{width:100%;border-collapse:collapse;font-size:22px}td{padding:9px 0}td+td{
 <div class="p"><div class="c f1"><h2>Mercado</h2><table id="mk"></table><div class="k" style="margin-top:14px">Blue, 30 días</div><svg id="sv" viewBox="0 0 300 90" preserveAspectRatio="none" style="width:100%;height:26%"></svg></div>
 <div class="c f1" style="overflow-y:auto"><h2>Independiente</h2><div id="fu" class="m">Buscando partido…</div></div></div>
 <div class="p"><div class="c col" style="width:30%;text-align:center"><h2 style="margin:0">Lumi</h2><div id="fa"><i class="ey l"></i><i class="ey r"></i><i class="ck l"></i><i class="ck r"></i><i id="mo2"></i></div><div id="fs" class="m" style="min-height:46px;margin:6px 0"></div><div class="f1"></div><button id="mic" style="margin:0 0 8px;font-size:22px;padding:18px 8px">🎤 Hablar</button><button class="gb" id="vb"></button><button class="gb" id="wb2" style="margin-top:8px;display:none"></button></div><div class="c col f1"><div id="cm" class="f1"></div><div id="cq" style="margin-top:8px"></div><form class="row" id="fi"><input id="ti" placeholder="Escribí o dictá con el micrófono del teclado" maxlength="300" autocomplete="off"><button>Enviar</button></form></div></div>
-</div><div id="cf"></div><div id="dots"><i></i><i class="a"></i><i></i><i></i><i></i><i></i><i></i></div>
+</div><div id="gr">⚙</div>
+<div id="cg"><div id="cb"><div class="row sp"><h2 style="margin:0">Configuración</h2><span id="cx" style="font-size:28px;padding:0 6px 0 20px;color:#8B93A7">✕</span></div>
+<div class="k">Clave de Anthropic · para que Lumi piense</div><div id="s1"></div><div class="row"><input id="k1" type="password" placeholder="sk-ant-…" autocomplete="off" autocapitalize="off"><button data-k="1">Guardar</button></div>
+<div class="k">Clave de OpenAI · para que escuche y hable</div><div id="s2"></div><div class="row"><input id="k2" type="password" placeholder="sk-…" autocomplete="off" autocapitalize="off"><button data-k="2">Guardar</button></div>
+<div class="k">Voz</div><div class="row"><button class="gb" id="cv"></button><button class="gb" id="cp" style="margin-left:8px">▶ Probar voz</button></div>
+<div id="cs" style="margin-top:16px;min-height:24px;font-weight:600"></div></div></div>
+<div id="cf"></div><div id="dots"><i></i><i class="a"></i><i></i><i></i><i></i><i></i><i></i></div>
 <div id="ov"><div class="k" id="ovt"></div><div id="ovn"></div><div class="big" id="ovs"></div><button id="ovb">Parar</button></div>
 <div id="wo"><div id="wb"><div class="row sp"><h2 id="wt" style="margin:0"></h2><div class="row"><div class="big" id="wm"></div><span id="wx" style="font-size:28px;padding:0 4px 0 22px;color:#8B93A7">✕</span></div></div><div id="wr" style="font-size:19px;color:#C9CEDB;margin-top:6px"></div><div id="wh"></div></div></div>
 <div id="mo"><div id="mb"><img id="mi"><div><span class="k" id="ms"></span><h3 id="mt"></h3><p id="md"></p></div></div></div>
@@ -253,7 +263,7 @@ t+="\nRecordatorios diarios: "+(S.rec.map(function(r){return z(r.h)+":"+z(r.m)+"
 var mk=$("mk").textContent;if(mk)t+="\nDólar (oficial, blue, MEP, CCL): "+mk.replace(/\$/g," $")+".";return t}
 function resIA(){if(!D.w||!S||sinK)return;D.riaP=1;google.script.run.withSuccessHandler(function(o){D.riaP=0;D.riaT=+new Date();if(o&&o.error=="sinclave")sinK=1;if(o&&o.t){D.ria=o.t;$("sum").textContent=o.t}}).withFailureHandler(function(){D.riaP=0;D.riaT=+new Date()}).webIA(K,"resumen",ctxIA(),[])}
 function chatP(){var h="";if(!HI.length)h='<div class="ma">Hola. Sé la agenda, el clima, las noticias, las compras, cómo van los chicos y el entreno. Preguntame o pedime que anote algo.</div>';for(var i=0;i<HI.length;i++)h+='<div class="'+(HI[i].r=="u"?"mu":"ma")+'">'+esc(HI[i].t)+"</div>";
-if(esp)h+='<div class="ma m">Pensando…</div>';var kf='<div class="row" style="margin-top:10px"><input id="kc" type="password" placeholder="sk-…" autocomplete="off"><button id="kb" type="button">Guardar</button></div></div>';if(sinK==2)h+='<div class="ma">Falta la clave de Anthropic. Pegala acá, se guarda en tu cuenta de Google y no vuelve a pedirse.'+kf;else if(D.voz===false)h+='<div class="ma">Para que Lumi te escuche por el micrófono y hable con voz natural falta una clave de OpenAI. Pegala acá, se guarda igual que la otra.'+kf;
+if(esp)h+='<div class="ma m">Pensando…</div>';if(sinK==2)h+='<div class="ma">Me falta la clave de Anthropic para poder contestar. Tocá la tuerca ⚙ de abajo a la derecha y cargala.</div>';else if(D.voz===false)h+='<div class="ma">Para escucharte por el micrófono y hablar con voz natural me falta la clave de OpenAI. Tocá la tuerca ⚙ de abajo a la derecha y cargala.</div>';
 $("cm").innerHTML=h;$("cm").scrollTop=1e6;$("vb").textContent=vz?"🔊 Voz":"🔇 Mudo"}
 function enviar(q,au){if(esp)return;calla();parar();pu=q?1:0;if(q)HI.push({r:"u",t:q});esp=1;cara("pen",au?"Entendiendo…":"Pensando…");$("lc").textContent="";chatP();var env=[];for(var i=0;i<HI.length;i++)if(!HI[i].x)env.push({r:HI[i].r,t:HI[i].t});
 google.script.run.withSuccessHandler(chatR).withFailureHandler(function(e){chatR({error:e&&e.message||"sin conexión"})}).webIA(K,"chat",ctxIA(),env.slice(-12),{au:au||"",voz:vz&&D.voz?1:0})}
@@ -269,6 +279,12 @@ try{vz=localStorage.getItem("vz")=="0"?0:1}catch(e){}
 $("vb").onclick=function(){vz=vz?0:1;try{localStorage.setItem("vz",vz)}catch(e){}if(!vz&&window.speechSynthesis)speechSynthesis.cancel();chatP()};
 $("sum").onclick=function(e){e.stopPropagation();decir(this.textContent)};
 chatP();
+function cfgP(){$("s1").innerHTML=D.ia?'<span class="g">✓ Cargada</span>':'<span class="r">Falta cargarla</span>';$("s2").innerHTML=D.voz?'<span class="g">✓ Cargada</span>':'<span class="r">Falta cargarla</span>';$("cv").textContent=vz?"🔊 Lumi habla: sí":"🔇 Lumi habla: no"}
+$("gr").onclick=function(){cfgP();$("cs").textContent="";$("cg").className="on"};
+$("cg").onclick=function(e){var t=e.target,k=t.getAttribute&&t.getAttribute("data-k");if(t==this||t.id=="cx"){this.className="";return}
+if(t.id=="cv"){$("vb").onclick();cfgP();return}if(t.id=="cp"){$("cs").textContent=D.voz?"Pidiendo la voz…":"Sin clave de OpenAI uso la voz del aparato.";decir("Hola, soy Lumi. Ya tengo voz.");return}if(!k)return;
+var i=$("k"+k),c=i.value.replace(/\s/g,""),an=c.indexOf("sk-ant-")==0;if(!c)return;if(k=="1"&&!an){$("cs").textContent="Esa no es una clave de Anthropic: tiene que empezar con sk-ant-";return}if(k=="2"&&(an||c.indexOf("sk-")!=0)){$("cs").textContent="Esa no es una clave de OpenAI: tiene que empezar con sk- (y no con sk-ant-)";return}
+$("cs").textContent="Guardando…";google.script.run.withSuccessHandler(function(o){if(o&&o.ok){i.value="";if(o.tipo=="voz")D.voz=true;else{D.ia=true;sinK=0;resIA()}pista();chatP();cfgP();$("cs").textContent="✓ Guardada."}else $("cs").textContent="No la pude guardar: revisá que esté completa."}).withFailureHandler(function(e){$("cs").textContent="Error al guardar: "+(e&&e.message||"sin conexión")}).webClave(K,c)};
 $("mic").onclick=function(){if(esp)return;if(lst=="esc"&&mOn){finEsc();return}charla=0;escuchar(1)};
 $("wb2").onclick=function(){wk2=wk2?0:1;try{localStorage.setItem("wk",wk2)}catch(e){}micP();if(wk2)oir(1);else{calla();cara("")}};
 try{wk2=localStorage.getItem("wk")=="1"?1:0}catch(e){}micP();if(wk2&&SR)setTimeout(function(){oir(1)},3000);
