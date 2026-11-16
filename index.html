@@ -99,7 +99,7 @@ table{width:100%;border-collapse:collapse;font-size:22px}td{padding:9px 0}td+td{
 <div id="mo"><div id="mb"><img id="mi"><div><span class="k" id="ms"></span><h3 id="mt"></h3><p id="md"></p></div></div></div>
 <script>
 var K="__TOKEN__",API="https://script.google.com/macros/s/AKfycbwB-xtbR7yxmMXy77fEUITEc60x7MUFv3ShhFdvKQ-tpX_3T4dO3j5rtaA1QXBn4ffZ/exec";
-if(K.charAt(0)=="_"){try{var hk=(location.hash.match(/k=([0-9a-f]+)/)||[])[1];if(hk){localStorage.setItem("tk",hk);history.replaceState(null,"",location.pathname)}K=localStorage.getItem("tk")||""}catch(e){K=""}}
+if(K.charAt(0)=="_"){try{var hk=(location.hash.match(/k=([0-9a-f]+)/)||[])[1];if(hk){localStorage.setItem("tk",hk)}K=localStorage.getItem("tk")||""}catch(e){K=""}}
 if(!window.google){window.google={script:{}};Object.defineProperty(window.google.script,"run",{get:function(){var ok=null,ko=null,o={withSuccessHandler:function(f){ok=f;return o},withFailureHandler:function(f){ko=f;return o}},N=["webDatos","webGuardar","webTildar","webAgregar","webLista","webIA","webClave"];
 for(var i=0;i<N.length;i++)(function(n){o[n]=function(){var a=[].slice.call(arguments),x=new XMLHttpRequest();x.open("POST",API);x.setRequestHeader("Content-Type","text/plain;charset=utf-8");x.onload=function(){var j=null;try{j=JSON.parse(x.responseText)}catch(e){}if(j&&!j.e){if(ok)ok(j.r)}else if(ko)ko({message:j?j.e:"respuesta inválida"})};x.onerror=function(){if(ko)ko({message:"sin conexión"})};x.send(JSON.stringify({fn:n,args:a}))}})(N[i]);return o}})}
 var LAT=-34.53,LON=-58.49,D={},$=function(i){return document.getElementById(i)};
